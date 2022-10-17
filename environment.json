@@ -1,0 +1,83 @@
+{
+    "headers": "application/json",
+
+    "test": {
+        "api-url": "https://api.trello.com/1",
+        "ui-url": "https://trello.com",
+        "users": {
+            "admin": {
+                "key": "91727633190edb1874a91ce04fee5a77",
+                "token": "124d05123161a59406eef807272f3ed4ba46257bed3d1979d992404bde7e3621",
+                "username": "uname",
+                "password": "pass"
+            },
+
+            "guest": {
+                "key": "yourkey",
+                "token": "yourtoken",
+                "username": "uname",
+                "password": "pass"
+            }
+        }
+    },
+
+    "develop": {
+        "api-url": "https://api.trello.com/1",
+        "ui-url": "https://trello.com",
+        "users": {
+            "admin": {
+                "key": "yourkey",
+                "token": "yourtoken",
+                "username": "uname",
+                "password": "pass"
+            },
+
+            "guest": {
+                "key": "yourkey",
+                "token": "yourtoken",
+                "username": "uname",
+                "password": "pass"
+            }
+        }
+    },
+
+    "staging": {
+        "api-url": "https://api.trello.com/1",
+        "ui-url": "https://trello.com",
+        "users": {
+            "admin": {
+                "key": "yourkey",
+                "token": "yourtoken",
+                "username": "uname",
+                "password": "pass"
+            },
+
+            "guest": {
+                "key": "yourkey",
+                "token": "yourtoken",
+                "username": "uname",
+                "password": "pass"
+            }
+        }
+    },
+
+    "production": {
+        "api-url": "https://api.trello.com/1",
+        "ui-url": "https://trello.com",
+        "users": {
+            "admin": {
+                "key": "yourkey",
+                "token": "yourtoken",
+                "username": "uname",
+                "password": "pass"
+            },
+
+            "guest": {
+                "key": "yourkey",
+                "token": "yourtoken",
+                "username": "uname",
+                "password": "pass"
+            }
+        }
+    }
+}

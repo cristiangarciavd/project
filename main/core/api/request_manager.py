@@ -10,6 +10,9 @@ from json import JSONDecodeError
 class RequestManager():
     """Request Manager Implementation
     """
+    
+    __instance = None
+    
     def __init__(self):
         """RM Parameters
 
@@ -33,6 +36,13 @@ class RequestManager():
             'token': self.token
         }
         
+    @staticmethod
+    def get_instance():
+        """Get instance of the RequestManager class
+        """
+        if RequestManager.__instance is None:
+            RequestManager.__instance = RequestManager()
+        return RequestManager.__instance
         
     def make_request(self, http_method, endpoint, payload=None, **kwargs):
         """Send request

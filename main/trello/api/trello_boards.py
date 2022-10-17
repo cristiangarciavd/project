@@ -16,8 +16,7 @@ class TrelloBoard:
             id (str): board id
             method (str): get, update, delete, create
         """
-        instance = RequestManager()
-        return instance.make_request(http_method=method, endpoint=f"/boards/{id}", **kwargs)
+        return RequestManager.get_instance().make_request(http_method=method, endpoint=f"/boards/{id}", **kwargs)
     
     
     @staticmethod
@@ -27,8 +26,7 @@ class TrelloBoard:
         Args:
             board_id (str): board id
         """
-        instance = RequestManager()
-        return instance.make_request(http_method="post", endpoint=f"/boards/{board_id}/lists", **kwargs)
+        return RequestManager.get_instance().make_request(http_method="post", endpoint=f"/boards/{board_id}/lists", **kwargs)
 
     @staticmethod
     def get_all_lists(board_id, **kwargs):
@@ -37,5 +35,4 @@ class TrelloBoard:
         Args:
             board_id (str): board id
         """
-        instance = RequestManager()
-        return instance.make_request(http_method="get", endpoint=f"/boards/{board_id}/lists", **kwargs)
+        return RequestManager.get_instance().make_request(http_method="get", endpoint=f"/boards/{board_id}/lists", **kwargs)

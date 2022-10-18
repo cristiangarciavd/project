@@ -8,6 +8,9 @@ pytest = "*"
 pytest-bdd = "*"
 requests = "*"
 api-package = {editable = true, path = "."}
+pylint = "*"
+flake8 = "*"
+pycodestyle = "*"
 
 [dev-packages]
 

@@ -2,6 +2,7 @@ import requests
 from main.core.utils.json_reader import JsonReader
 from main.core.api.http_methods import HttpMethods
 from json import JSONDecodeError
+from main.logger.logger import *
 
 class RequestManager():
     """Request Manager Implementation
@@ -39,7 +40,8 @@ class RequestManager():
         if RequestManager.__instance is None:
             RequestManager.__instance = RequestManager()
         return RequestManager.__instance
-        
+    
+    @wrap(entering, exiting)    
     def make_request(self, http_method, endpoint, payload=None, **kwargs):
         """Send request
 
@@ -51,6 +53,7 @@ class RequestManager():
         Returns:
             _type_: Response Json , Response status code
         """
+        get_logger().debug("Updating query args")
         self.query.update(kwargs)
 
         self.response = requests.request(

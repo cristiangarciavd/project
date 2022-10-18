@@ -1,4 +1,4 @@
-from request_manager import RequestManager
+from main.core.api.request_manager import RequestManager
 
 
 trelloOb = RequestManager()

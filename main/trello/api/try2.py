@@ -1,4 +1,4 @@
-from trello_boards import TrelloBoard
+from main.trello.api.trello_boards import TrelloBoard
 
 # #create new board
 req1 = TrelloBoard.manage_board(method="post", name = 'New_Board_Z')

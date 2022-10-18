@@ -1,38 +1,52 @@
-import sys
- 
-# setting path
-sys.path.append('D:/JS/Api Testing/project')
+from main.core.api.http_methods import HttpMethods
+from main.trello.api.trello_routes import TrelloApiRoutes
 from main.core.api.request_manager import RequestManager
+
 
 class TrelloBoard:
     """Trello boards requests
     """
-    
-    @staticmethod
-    def manage_board(method, id="", **kwargs):
-        """Manage Board
-
-        Args:
-            id (str): board id
-            method (str): get, update, delete, create
-        """
-        return RequestManager.get_instance().make_request(http_method=method, endpoint=f"/boards/{id}", **kwargs)
-    
-    
-    @staticmethod
-    def create_list(board_id, **kwargs):
-        """Create list on Board
-
-        Args:
-            board_id (str): board id
-        """
-        return RequestManager.get_instance().make_request(http_method="post", endpoint=f"/boards/{board_id}/lists", **kwargs)
 
     @staticmethod
-    def get_all_lists(board_id, **kwargs):
-        """All lists from the Board
+    def get_all_boards(**Kwargs):
+        endpoint_board = TrelloApiRoutes.BOARDS.value
+        return RequestManager.get_instance().make_request(
+            HttpMethods.GET.value,
+            endpoint_board,
+            **Kwargs
+        )
+    @staticmethod
+    def get_board(id="", **Kwargs):
+        endpoint_board = f"{TrelloApiRoutes.BOARD.value}{id}"
+        return RequestManager.get_instance().make_request(
+            HttpMethods.GET.value,
+            endpoint_board,
+            **Kwargs
+        )
+    @staticmethod
+    def create_board(name,**Kwargs):
+        endpoint_board = TrelloApiRoutes.BOARD.value
+        return RequestManager.get_instance().make_request(
+            HttpMethods.POST.value,
+            endpoint_board,
+            name=name,
+            ** Kwargs
+        )
 
-        Args:
-            board_id (str): board id
-        """
-        return RequestManager.get_instance().make_request(http_method="get", endpoint=f"/boards/{board_id}/lists", **kwargs)
+    @staticmethod
+    def update_board(id, **Kwargs):
+        endpoint_board = f"{TrelloApiRoutes.BOARD.value}{id}"
+        return RequestManager.get_instance().make_request(
+            HttpMethods.PUT.value,
+            endpoint_board,
+            **Kwargs
+        )
+
+    @staticmethod
+    def delete_board(id):
+        endpoint_board = f"{TrelloApiRoutes.BOARD.value}{id}"
+        return RequestManager.get_instance().make_request(
+            HttpMethods.DELETE.value,
+            endpoint_board,
+        )
+    

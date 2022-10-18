@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "7a0f5c4f85021466ccd7830acb6ab51102d3104b4e2ed9b858945f6eed8fbd22"
+            "sha256": "e9bd86eb341179b37c163fe6dedae6df4b94a896edefe97a369dfcafae898aaf"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -16,6 +16,10 @@
         ]
     },
     "default": {
+        "api-package": {
+            "editable": true,
+            "path": "."
+        },
         "attrs": {
             "hashes": [
                 "sha256:29adc2665447e5191d0e7c568fde78b21f9672d344281d0c6e1ab085429b22b6",

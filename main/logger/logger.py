@@ -1,13 +1,13 @@
 import logging, logging.config
 
-
+@staticmethod
 def get_logger(name = 'appLogger'):
 
 	try:
-		logging.config.fileConfig("logger/log.ini")
+		logging.config.fileConfig("./log.ini")
 		logger = logging.getLogger(name)
 	except:
-		log_file = 'logger/logfile.log'
+		log_file = 'main/logger/logfile.log'
 		log_level = logging.INFO
 		logging.basicConfig(level=log_level, filename=log_file, filemode="w+",
 								format="%(asctime)-15s %(levelname)-8s %(message)s")
@@ -34,14 +34,7 @@ def entering(func, *args):
 	logger.info(func.__doc__)
 	logger.debug("Function at line %d in %s" %
 		(func.__code__.co_firstlineno, func.__code__.co_filename))
-	if args:
-		try:
-			logger.warn("The argument %s is %s" % (func.__code__.co_varnames[0], *args))
-		except IndexError:
-			logger.warn("No arguments")
-	
 
 def exiting(func):
 	""" Post function logging """
-	logger = get_logger('appLogger')
-	logger.debug("Exited  %s", func.__name__)
+	get_logger().debug("Exited  %s", func.__name__)

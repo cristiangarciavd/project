@@ -1,8 +1,4 @@
 import requests
-import sys
- 
-# setting path
-sys.path.append('D:/JS/Api Testing/project')
 from main.core.utils.json_reader import JsonReader
 from main.core.api.http_methods import HttpMethods
 from json import JSONDecodeError

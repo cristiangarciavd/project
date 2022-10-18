@@ -5,13 +5,15 @@ class JsonReader:
     @staticmethod
     def get_json(file):
         
-        # Opening JSON file
-        f = open(file)
+        f = open(file) # Opening JSON file
         
-        # JSON object as a dictionary
-        data = json.load(f)
+        try:
+            data = json.load(f) # JSON object as a dictionary
+            
+        except:
+            raise Exception("Error trying to load JSON file")
         
-        # Closing file
-        f.close()
+        finally:
+            f.close()  # Closing file
        
         return data

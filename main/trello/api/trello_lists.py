@@ -1,7 +1,3 @@
-import sys
- 
-# setting path
-sys.path.append('D:/JS/Api Testing/project')
 from main.core.api.request_manager import RequestManager
 
 class TrelloList:

@@ -1,26 +1,30 @@
+"""
+Provides a Request Manager Class
+"""
+from json import JSONDecodeError
 import requests
 from main.core.utils.json_reader import JsonReader
 from main.core.api.http_methods import HttpMethods
-from json import JSONDecodeError
-from main.logger.logger import *
+from main.logger.logger import wrap, get_logger, entering, exiting
+
 
 class RequestManager():
     """Request Manager Implementation
     """
-    
+
     __instance = None
-    
+
     def __init__(self):
         """RM Parameters
 
         Args:
             conf_file (str, optional): Path to file. Defaults to "".
         """
-        
+
         self.__config = JsonReader().get_json("./configuration.json")
-            
+
         __environment = JsonReader().get_json('./environment.json')
-        
+
         selected_env = self.__config.get("environment", "test")
         self.__users = __environment.get(selected_env).get("users")
         self.url = __environment.get(selected_env).get("api-url")
@@ -28,11 +32,7 @@ class RequestManager():
         self.token = self.__users.get("admin").get("token")
         self.response = None
         self.headers = {"Accept": __environment["headers"]}
-        self.query = {
-            'key': self.key,
-            'token': self.token
-        }
-        
+
     @staticmethod
     def get_instance():
         """Get instance of the RequestManager class
@@ -40,8 +40,8 @@ class RequestManager():
         if RequestManager.__instance is None:
             RequestManager.__instance = RequestManager()
         return RequestManager.__instance
-    
-    @wrap(entering, exiting)    
+
+    @wrap(entering, exiting)
     def make_request(self, http_method, endpoint, payload=None, **kwargs):
         """Send request
 
@@ -53,15 +53,23 @@ class RequestManager():
         Returns:
             _type_: Response Json , Response status code
         """
+        timeout = self.__config.get("implicit_wait", 5)
+        query = {
+            'key': self.key,
+            'token': self.token
+        }
         get_logger().debug("Updating query args")
-        self.query.update(kwargs)
+        query.update(kwargs)
+        data = None if payload is None else payload
+        current_method = HttpMethods[http_method.upper()].value
 
         self.response = requests.request(
-                                        method=HttpMethods[http_method.upper()].value,
+                                        method=current_method,
                                         url=f"{self.url}{endpoint}",
                                         headers=self.headers,
-                                        params=self.query,
-                                        data=None if payload is None else payload
+                                        params=query,
+                                        timeout=timeout,
+                                        data=data
                                         )
         try:
             return self.response.json(), self.response.status_code

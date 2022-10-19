@@ -2,3 +2,4 @@
 configuration.json
 environment.json
 main/logger/logfile.log
+api_package.egg-info

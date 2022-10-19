@@ -2,6 +2,7 @@
 """
 from enum import Enum
 
+
 class HttpMethods(Enum):
     """To manage Http Methods
     """

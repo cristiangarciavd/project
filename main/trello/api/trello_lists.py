@@ -1,3 +1,4 @@
+"""Provides a TrelloList class to manage lists in Trello"""
 from main.core.api.http_methods import HttpMethods
 from main.trello.api.trello_routes import TrelloApiRoutes
 from main.core.api.request_manager import RequestManager
@@ -7,37 +8,37 @@ class TrelloList:
     """Trello lists requests
     """
     @staticmethod
-    def get_all_list(id="", **Kwargs):
-        endpoint_board = f"{TrelloApiRoutes.BOARD.value}{id}{TrelloApiRoutes.LIST.value}"
+    def get_all_list(board_id="", **Kwargs):
+        """Get all list in the board
+
+        Args:
+            board_id (str, optional): board ID. Defaults to "".
+
+        Returns:
+            _type_: _description_
+        """
+        endpoint_lists = (TrelloApiRoutes.LIST_IN_BOARD.value).format(board_id)
         return RequestManager.get_instance().make_request(
             HttpMethods.GET.value,
-            endpoint_board,
+            endpoint_lists,
             **Kwargs
         )
+
     @staticmethod
-    def create_list(id, name,**Kwargs):
-        endpoint_board = f"{TrelloApiRoutes.BOARD.value}{id}{TrelloApiRoutes.LIST.value}"
+    def create_list(board_id, name, **Kwargs):
+        """Create a list
+
+        Args:
+            board_id (str): board ID
+            name (str): list name
+
+        Returns:
+            _type_: _description_
+        """
+        endpoint_list = (TrelloApiRoutes.LIST_IN_BOARD.value).format(board_id)
         return RequestManager.get_instance().make_request(
             HttpMethods.POST.value,
-            endpoint_board,
+            endpoint_list,
             name=name,
-            ** Kwargs
+            **Kwargs
         )
-    @staticmethod
-    def manage_list(method, id="", **kwargs):
-        """Manage List
-
-        Args:
-            id (str): list id
-            method (str): get, update, delete, create
-        """
-        return RequestManager.get_instance().make_request(http_method=method, endpoint=f"/lists/{id}", **kwargs)
-    
-    @staticmethod
-    def get_all_cards_on_list(id="", **kwargs):
-        """Get all cads on the list
-
-        Args:
-            id (str): list id
-        """
-        return RequestManager.get_instance().make_request(http_method="get", endpoint=f"/lists/{id}/cards", **kwargs)

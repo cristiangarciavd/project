@@ -9,4 +9,6 @@ class TrelloApiRoutes(Enum):
     BOARD = "/boards/"
     LIST = "/lists"
     LIST_IN_BOARD = "/boards/{}/lists"
-    DELETE = "DELETE"
+    CARDS = "/cards/"
+    CARD_IN_BOARD = "/cards/{}/board"
+    CARD_IN_LIST = "/cards/{}/list"

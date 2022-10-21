@@ -42,7 +42,7 @@ class RequestManager():
         return RequestManager.__instance
 
     @wrap(entering, exiting)
-    def make_request(self, http_method, endpoint, payload=None, **kwargs):
+    def make_request(self, http_method, endpoint, payload={}, **kwargs):
         """Send request
 
         Args:
@@ -60,7 +60,7 @@ class RequestManager():
         }
         get_logger().debug("Updating query args")
         query.update(kwargs)
-        data = None if payload is None else payload
+        query.update(payload)
         current_method = HttpMethods[http_method.upper()].value
 
         self.response = requests.request(
@@ -69,7 +69,6 @@ class RequestManager():
                                         headers=self.headers,
                                         params=query,
                                         timeout=timeout,
-                                        data=data
                                         )
         try:
             return self.response.json(), self.response.status_code

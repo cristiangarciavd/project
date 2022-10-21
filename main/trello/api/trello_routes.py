@@ -5,6 +5,8 @@ from enum import Enum
 class TrelloApiRoutes(Enum):
     """Trello endpoints enum
     """
+    ORGANIZATIONS = "/organizations"
+    MEMBER_IN_ORGANIZATION = "/organizations/{}/members"
     BOARDS = "/members/me/boards"
     BOARD = "/boards/"
     LIST = "/lists"

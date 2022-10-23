@@ -1,6 +1,5 @@
 {
     "name": "AUTO_NEW_CARD",
     "desc": "AUTO_NEW_DESCRIPTION",
-    "defaultLabels": "true",
-    "idList": ""
+    "defaultLabels": "true"
 }

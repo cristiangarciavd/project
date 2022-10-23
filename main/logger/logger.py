@@ -37,7 +37,7 @@ def entering(func, *args):
     """ Pre function logging """
     logger = get_logger('appLogger')
     logger.debug("Entered %s", func.__name__)
-    logger.info(func.__doc__)
+    logger.debug(func.__doc__)
     logger.debug("Function at line %d in %s" %
                  (func.__code__.co_firstlineno, func.__code__.co_filename))
 

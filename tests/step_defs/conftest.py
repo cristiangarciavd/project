@@ -4,18 +4,8 @@ import pytest
 from main.core.utils.json_reader import JsonReader
 from main.core.api.request_manager import RequestManager
 from main.core.api.http_methods import HttpMethods
-from main.logger.logger import wrap, get_logger, entering, exiting
-
-@pytest.fixture(autouse=True, scope="module")
-def setup(request):
-    """context of before all
-    """
-
-    get_logger().info("======>>> EXECUTED BEFORE ALL <<<======\n")
-
-    def pytest_bdd_after_all():
-        get_logger().info("======>>> EXECUTED AFTER ALL  <<<======\n")
-    request.addfinalizer(pytest_bdd_after_all)
+from main.trello.api.trello_cards import TrelloCard
+from main.logger.logger import get_logger
 
 
 def pytest_bdd_before_scenario(request, feature, scenario):  # pylint: disable=W0613
@@ -35,7 +25,13 @@ def pytest_bdd_before_scenario(request, feature, scenario):  # pylint: disable=W
     scenario_tags = list(scenario.tags)
     get_logger().info("TAGS %s", scenario.tags)
     
-    if "fixture_create_organizations" in scenario_tags:
+    trello_mods = ["organizations", "boards", "lists", "cards"]
+    for mod in trello_mods:
+        if f"fixture_create_{mod}" in scenario_tags:
+            mods_creation_lvl = trello_mods.index(mod)
+            
+    
+    if mods_creation_lvl >= 0:
         get_logger().info("=> PRE CONDITION STAGE fixture_create_organizations")
         payload = JsonReader.get_json(
             "./main/trello/api/resources/payload_organizations_creation.json")
@@ -44,10 +40,10 @@ def pytest_bdd_before_scenario(request, feature, scenario):  # pylint: disable=W
             "/organizations",
             payload=payload
         )
-        get_logger().info('Response:\n%s', response)
+        get_logger().debug('Response:\n%s', response)
         request.context["organizations"] = response
         
-    if "fixture_create_boards" in scenario_tags:
+    if mods_creation_lvl >= 1:
         get_logger().info("=> PRE CONDITION STAGE fixture_create_boards")
         payload = JsonReader.get_json(
             "./main/trello/api/resources/payload_boards_creation.json")
@@ -57,10 +53,10 @@ def pytest_bdd_before_scenario(request, feature, scenario):  # pylint: disable=W
             "/boards",
             payload=payload
         )
-        get_logger().info('Response:\n%s', response)
+        get_logger().debug('Response:\n%s', response)
         request.context["boards"] = response
     
-    if "fixture_create_lists" in scenario_tags:
+    if mods_creation_lvl >= 2:
         get_logger().info("=> PRE CONDITION STAGE fixture_create_lists")
         payload = JsonReader.get_json(
             "./main/trello/api/resources/payload_lists_creation.json")
@@ -70,20 +66,16 @@ def pytest_bdd_before_scenario(request, feature, scenario):  # pylint: disable=W
             "/lists",
             payload=payload
         )
-        get_logger().info('Response:\n%s', response)
+        get_logger().debug('Response:\n%s', response)
         request.context["lists"] = response
     
-    if "fixture_create_cards" in scenario_tags:
+    if mods_creation_lvl >= 3:
         get_logger().info("=> PRE CONDITION STAGE fixture_create_cards")
         payload = JsonReader.get_json(
             "./main/trello/api/resources/payload_cards_creation.json")
-        payload['idList'] = request.context["lists"]["id"]
-        response, _ = RequestManager.get_instance().make_request(
-            HttpMethods.POST.value,
-            "/cards",
-            payload=payload
-        )
-        get_logger().info('Response:\n%s', response)
+        idList = request.context["lists"]["id"]
+        response, _ = TrelloCard.create_card(idList, payload=payload)
+        get_logger().debug('Response:\n%s', response)
         request.context["cards"] = response
 
 
@@ -117,3 +109,33 @@ def pytest_bdd_after_scenario(request, feature, scenario):  # pylint: disable=W0
 
     get_logger().info(
         f"===>>> FINISHED SCENARIO {scenario.name} WITH STATUS: {'FAILED' if scenario.failed else 'SUCCESS'}\n")
+
+@pytest.fixture()
+def datatable():
+    """fixture to support implementation of datatables
+
+    Returns:
+        DataTable
+    """
+    return DataTable()
+
+
+class DataTable:
+    """Datatable Class to manage table elements
+    """
+
+    def __init__(self):
+        pass
+
+    def __str__(self):
+        dt_str = ''
+        for field, value in self.__dict__.items():
+            dt_str = f'{dt_str}\n{field} = {value}'
+        return dt_str
+
+    def __repr__(self) -> str:
+        """
+        __repr__
+        :return:
+        """
+        return self.__str__()

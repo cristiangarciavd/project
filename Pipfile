@@ -11,6 +11,8 @@ api-package = {editable = true, path = "."}
 pylint = "*"
 flake8 = "*"
 pycodestyle = "*"
+sttable = "*"
+jsonschema = "*"
 
 [dev-packages]
 

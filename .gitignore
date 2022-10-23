@@ -4,3 +4,6 @@ environment.json
 main/logger/logfile.log
 api_package.egg-info
 .venv
+build
+node_modules
+.pytest_cache

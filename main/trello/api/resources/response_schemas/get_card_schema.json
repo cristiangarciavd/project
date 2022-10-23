@@ -1,0 +1,632 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "default": {},
+  "title": "Root Schema",
+  "required": [
+      "id",
+      "badges",
+      "checkItemStates",
+      "closed",
+      "dueComplete",
+      "dateLastActivity",
+      "desc",
+      "descData",
+      "due",
+      "dueReminder",
+      "email",
+      "idBoard",
+      "idChecklists",
+      "idList",
+      "idMembers",
+      "idMembersVoted",
+      "idShort",
+      "idAttachmentCover",
+      "labels",
+      "idLabels",
+      "manualCoverAttachment",
+      "name",
+      "pos",
+      "shortLink",
+      "shortUrl",
+      "start",
+      "subscribed",
+      "url",
+      "cover",
+      "isTemplate",
+      "cardRole"
+  ],
+  "properties": {
+      "id": {
+          "type": "string",
+          "default": "",
+          "title": "The id Schema",
+          "examples": [
+              "634ed61eb3cd4e019d1301f2"
+          ]
+      },
+      "badges": {
+          "type": "object",
+          "default": {},
+          "title": "The badges Schema",
+          "required": [
+              "attachmentsByType",
+              "location",
+              "votes",
+              "viewingMemberVoted",
+              "subscribed",
+              "fogbugz",
+              "checkItems",
+              "checkItemsChecked",
+              "checkItemsEarliestDue",
+              "comments",
+              "attachments",
+              "description",
+              "due",
+              "dueComplete",
+              "start"
+          ],
+          "properties": {
+              "attachmentsByType": {
+                  "type": "object",
+                  "default": {},
+                  "title": "The attachmentsByType Schema",
+                  "required": [
+                      "trello"
+                  ],
+                  "properties": {
+                      "trello": {
+                          "type": "object",
+                          "default": {},
+                          "title": "The trello Schema",
+                          "required": [
+                              "board",
+                              "card"
+                          ],
+                          "properties": {
+                              "board": {
+                                  "type": "integer",
+                                  "default": 0,
+                                  "title": "The board Schema",
+                                  "examples": [
+                                      0
+                                  ]
+                              },
+                              "card": {
+                                  "type": "integer",
+                                  "default": 0,
+                                  "title": "The card Schema",
+                                  "examples": [
+                                      0
+                                  ]
+                              }
+                          },
+                          "examples": [{
+                              "board": 0,
+                              "card": 0
+                          }]
+                      }
+                  },
+                  "examples": [{
+                      "trello": {
+                          "board": 0,
+                          "card": 0
+                      }
+                  }]
+              },
+              "location": {
+                  "type": "boolean",
+                  "default": false,
+                  "title": "The location Schema",
+                  "examples": [
+                      false
+                  ]
+              },
+              "votes": {
+                  "type": "integer",
+                  "default": 0,
+                  "title": "The votes Schema",
+                  "examples": [
+                      0
+                  ]
+              },
+              "viewingMemberVoted": {
+                  "type": "boolean",
+                  "default": false,
+                  "title": "The viewingMemberVoted Schema",
+                  "examples": [
+                      false
+                  ]
+              },
+              "subscribed": {
+                  "type": "boolean",
+                  "default": false,
+                  "title": "The subscribed Schema",
+                  "examples": [
+                      false
+                  ]
+              },
+              "fogbugz": {
+                  "type": "string",
+                  "default": "",
+                  "title": "The fogbugz Schema",
+                  "examples": [
+                      ""
+                  ]
+              },
+              "checkItems": {
+                  "type": "integer",
+                  "default": 0,
+                  "title": "The checkItems Schema",
+                  "examples": [
+                      0
+                  ]
+              },
+              "checkItemsChecked": {
+                  "type": "integer",
+                  "default": 0,
+                  "title": "The checkItemsChecked Schema",
+                  "examples": [
+                      0
+                  ]
+              },
+              "checkItemsEarliestDue": {
+                  "type": "null",
+                  "default": null,
+                  "title": "The checkItemsEarliestDue Schema",
+                  "examples": [
+                      null
+                  ]
+              },
+              "comments": {
+                  "type": "integer",
+                  "default": 0,
+                  "title": "The comments Schema",
+                  "examples": [
+                      0
+                  ]
+              },
+              "attachments": {
+                  "type": "integer",
+                  "default": 0,
+                  "title": "The attachments Schema",
+                  "examples": [
+                      0
+                  ]
+              },
+              "description": {
+                  "type": "boolean",
+                  "default": false,
+                  "title": "The description Schema",
+                  "examples": [
+                      true
+                  ]
+              },
+              "due": {
+                  "type": "null",
+                  "default": null,
+                  "title": "The due Schema",
+                  "examples": [
+                      null
+                  ]
+              },
+              "dueComplete": {
+                  "type": "boolean",
+                  "default": false,
+                  "title": "The dueComplete Schema",
+                  "examples": [
+                      false
+                  ]
+              },
+              "start": {
+                  "type": "null",
+                  "default": null,
+                  "title": "The start Schema",
+                  "examples": [
+                      null
+                  ]
+              }
+          },
+          "examples": [{
+              "attachmentsByType": {
+                  "trello": {
+                      "board": 0,
+                      "card": 0
+                  }
+              },
+              "location": false,
+              "votes": 0,
+              "viewingMemberVoted": false,
+              "subscribed": false,
+              "fogbugz": "",
+              "checkItems": 0,
+              "checkItemsChecked": 0,
+              "checkItemsEarliestDue": null,
+              "comments": 0,
+              "attachments": 0,
+              "description": true,
+              "due": null,
+              "dueComplete": false,
+              "start": null
+          }]
+      },
+      "checkItemStates": {
+          "type": "array",
+          "default": [],
+          "title": "The checkItemStates Schema",
+          "items": {},
+          "examples": [
+              []
+          ]
+      },
+      "closed": {
+          "type": "boolean",
+          "default": false,
+          "title": "The closed Schema",
+          "examples": [
+              false
+          ]
+      },
+      "dueComplete": {
+          "type": "boolean",
+          "default": false,
+          "title": "The dueComplete Schema",
+          "examples": [
+              false
+          ]
+      },
+      "dateLastActivity": {
+          "type": "string",
+          "default": "",
+          "title": "The dateLastActivity Schema",
+          "examples": [
+              "2022-10-18T19:30:29.762Z"
+          ]
+      },
+      "desc": {
+          "type": "string",
+          "default": "",
+          "title": "The desc Schema",
+          "examples": [
+              "Testing Card"
+          ]
+      },
+      "descData": {
+          "type": "object",
+          "default": {},
+          "title": "The descData Schema",
+          "required": [
+              "emoji"
+          ],
+          "properties": {
+              "emoji": {
+                  "type": "object",
+                  "default": {},
+                  "title": "The emoji Schema",
+                  "required": [],
+                  "properties": {},
+                  "examples": [{}]
+              }
+          },
+          "examples": [{
+              "emoji": {}
+          }]
+      },
+      "due": {
+          "type": "null",
+          "default": null,
+          "title": "The due Schema",
+          "examples": [
+              null
+          ]
+      },
+      "dueReminder": {
+          "type": "null",
+          "default": null,
+          "title": "The dueReminder Schema",
+          "examples": [
+              null
+          ]
+      },
+      "email": {
+          "type": "null",
+          "default": null,
+          "title": "The email Schema",
+          "examples": [
+              null
+          ]
+      },
+      "idBoard": {
+          "type": "string",
+          "default": "",
+          "title": "The idBoard Schema",
+          "examples": [
+              "6346fc12eebb20006f1ddcdc"
+          ]
+      },
+      "idChecklists": {
+          "type": "array",
+          "default": [],
+          "title": "The idChecklists Schema",
+          "items": {},
+          "examples": [
+              []
+          ]
+      },
+      "idList": {
+          "type": "string",
+          "default": "",
+          "title": "The idList Schema",
+          "examples": [
+              "63488b4c9d4e2501485d9071"
+          ]
+      },
+      "idMembers": {
+          "type": "array",
+          "default": [],
+          "title": "The idMembers Schema",
+          "items": {},
+          "examples": [
+              []
+          ]
+      },
+      "idMembersVoted": {
+          "type": "array",
+          "default": [],
+          "title": "The idMembersVoted Schema",
+          "items": {},
+          "examples": [
+              []
+          ]
+      },
+      "idShort": {
+          "type": "integer",
+          "default": 0,
+          "title": "The idShort Schema",
+          "examples": [
+              8
+          ]
+      },
+      "idAttachmentCover": {
+          "type": "null",
+          "default": null,
+          "title": "The idAttachmentCover Schema",
+          "examples": [
+              null
+          ]
+      },
+      "labels": {
+          "type": "array",
+          "default": [],
+          "title": "The labels Schema",
+          "items": {},
+          "examples": [
+              []
+          ]
+      },
+      "idLabels": {
+          "type": "array",
+          "default": [],
+          "title": "The idLabels Schema",
+          "items": {},
+          "examples": [
+              []
+          ]
+      },
+      "manualCoverAttachment": {
+          "type": "boolean",
+          "default": false,
+          "title": "The manualCoverAttachment Schema",
+          "examples": [
+              false
+          ]
+      },
+      "name": {
+          "type": "string",
+          "default": "",
+          "title": "The name Schema",
+          "examples": [
+              "New Card 700"
+          ]
+      },
+      "pos": {
+          "type": "integer",
+          "default": 0,
+          "title": "The pos Schema",
+          "examples": [
+              136
+          ]
+      },
+      "shortLink": {
+          "type": "string",
+          "default": "",
+          "title": "The shortLink Schema",
+          "examples": [
+              "I8wxcLIx"
+          ]
+      },
+      "shortUrl": {
+          "type": "string",
+          "default": "",
+          "title": "The shortUrl Schema",
+          "examples": [
+              "https://trello.com/c/I8wxcLIx"
+          ]
+      },
+      "start": {
+          "type": "null",
+          "default": null,
+          "title": "The start Schema",
+          "examples": [
+              null
+          ]
+      },
+      "subscribed": {
+          "type": "boolean",
+          "default": false,
+          "title": "The subscribed Schema",
+          "examples": [
+              false
+          ]
+      },
+      "url": {
+          "type": "string",
+          "default": "",
+          "title": "The url Schema",
+          "examples": [
+              "https://trello.com/c/I8wxcLIx/8-new-card-700"
+          ]
+      },
+      "cover": {
+          "type": "object",
+          "default": {},
+          "title": "The cover Schema",
+          "required": [
+              "idAttachment",
+              "color",
+              "idUploadedBackground",
+              "size",
+              "brightness",
+              "idPlugin"
+          ],
+          "properties": {
+              "idAttachment": {
+                  "type": "null",
+                  "default": null,
+                  "title": "The idAttachment Schema",
+                  "examples": [
+                      null
+                  ]
+              },
+              "color": {
+                  "type": "null",
+                  "default": null,
+                  "title": "The color Schema",
+                  "examples": [
+                      null
+                  ]
+              },
+              "idUploadedBackground": {
+                  "type": "null",
+                  "default": null,
+                  "title": "The idUploadedBackground Schema",
+                  "examples": [
+                      null
+                  ]
+              },
+              "size": {
+                  "type": "string",
+                  "default": "",
+                  "title": "The size Schema",
+                  "examples": [
+                      "normal"
+                  ]
+              },
+              "brightness": {
+                  "type": "string",
+                  "default": "",
+                  "title": "The brightness Schema",
+                  "examples": [
+                      "dark"
+                  ]
+              },
+              "idPlugin": {
+                  "type": "null",
+                  "default": null,
+                  "title": "The idPlugin Schema",
+                  "examples": [
+                      null
+                  ]
+              }
+          },
+          "examples": [{
+              "idAttachment": null,
+              "color": null,
+              "idUploadedBackground": null,
+              "size": "normal",
+              "brightness": "dark",
+              "idPlugin": null
+          }]
+      },
+      "isTemplate": {
+          "type": "boolean",
+          "default": false,
+          "title": "The isTemplate Schema",
+          "examples": [
+              false
+          ]
+      },
+      "cardRole": {
+          "type": "null",
+          "default": null,
+          "title": "The cardRole Schema",
+          "examples": [
+              null
+          ]
+      }
+  },
+  "examples": [{
+      "id": "634ed61eb3cd4e019d1301f2",
+      "badges": {
+          "attachmentsByType": {
+              "trello": {
+                  "board": 0,
+                  "card": 0
+              }
+          },
+          "location": false,
+          "votes": 0,
+          "viewingMemberVoted": false,
+          "subscribed": false,
+          "fogbugz": "",
+          "checkItems": 0,
+          "checkItemsChecked": 0,
+          "checkItemsEarliestDue": null,
+          "comments": 0,
+          "attachments": 0,
+          "description": true,
+          "due": null,
+          "dueComplete": false,
+          "start": null
+      },
+      "checkItemStates": [],
+      "closed": false,
+      "dueComplete": false,
+      "dateLastActivity": "2022-10-18T19:30:29.762Z",
+      "desc": "Testing Card",
+      "descData": {
+          "emoji": {}
+      },
+      "due": null,
+      "dueReminder": null,
+      "email": null,
+      "idBoard": "6346fc12eebb20006f1ddcdc",
+      "idChecklists": [],
+      "idList": "63488b4c9d4e2501485d9071",
+      "idMembers": [],
+      "idMembersVoted": [],
+      "idShort": 8,
+      "idAttachmentCover": null,
+      "labels": [],
+      "idLabels": [],
+      "manualCoverAttachment": false,
+      "name": "New Card 700",
+      "pos": 136,
+      "shortLink": "I8wxcLIx",
+      "shortUrl": "https://trello.com/c/I8wxcLIx",
+      "start": null,
+      "subscribed": false,
+      "url": "https://trello.com/c/I8wxcLIx/8-new-card-700",
+      "cover": {
+          "idAttachment": null,
+          "color": null,
+          "idUploadedBackground": null,
+          "size": "normal",
+          "brightness": "dark",
+          "idPlugin": null
+      },
+      "isTemplate": false,
+      "cardRole": null
+  }]
+}

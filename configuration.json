@@ -1,0 +1,21 @@
+{
+    "environment": "test",
+    "browser": "REMOTE",
+    "browser_options": {},
+    "remote_config": {
+        "username": "asdasd",
+        "access_token": "asdasdad",
+        "grid_url": "asdasd/asdasd",
+        "capabilities": {
+            "LT:Options": {
+                "build" : "TRELLO",
+                "platformName": "Win"
+            },
+            "browserName": "Chrome",
+            "browserVersion": "latest"
+        }
+    },
+    
+    "implicit_wait": 10,
+    "explicit_wait": 60
+}

@@ -5,6 +5,7 @@ from main.core.utils.json_reader import JsonReader
 from main.core.api.request_manager import RequestManager
 from main.core.api.http_methods import HttpMethods
 from main.trello.api.trello_cards import TrelloCard
+from main.trello.api.trello_organizations import TrelloOrganization
 from main.logger.logger import get_logger
 
 
@@ -24,13 +25,13 @@ def pytest_bdd_before_scenario(request, feature, scenario):  # noqa:E501 pylint:
     request.response = {}
     scenario_tags = list(scenario.tags)
     get_logger().info("TAGS %s", scenario.tags)
-
+    mods_creation_lvl = 0
     trello_mods = ["organizations", "boards", "lists", "cards"]
     for mod in trello_mods:
         if f"fixture_create_{mod}" in scenario_tags:
-            mods_creation_lvl = trello_mods.index(mod)
+            mods_creation_lvl = trello_mods.index(mod) + 1
 
-    if mods_creation_lvl >= 0:
+    if mods_creation_lvl >= 1:
         get_logger().info("=> PRE CONDITION STAGE fixture_create_organizations")  # noqa:E501
         payload = JsonReader.get_json(
             "./main/trello/api/resources/payload_organizations_creation.json")  # noqa:E501
@@ -42,7 +43,7 @@ def pytest_bdd_before_scenario(request, feature, scenario):  # noqa:E501 pylint:
         get_logger().debug('Response:\n%s', response)
         request.context["organizations"] = response
 
-    if mods_creation_lvl >= 1:
+    if mods_creation_lvl >= 2:
         get_logger().info("=> PRE CONDITION STAGE fixture_create_boards")
         payload = JsonReader.get_json(
             "./main/trello/api/resources/payload_boards_creation.json")
@@ -55,7 +56,7 @@ def pytest_bdd_before_scenario(request, feature, scenario):  # noqa:E501 pylint:
         get_logger().debug('Response:\n%s', response)
         request.context["boards"] = response
 
-    if mods_creation_lvl >= 2:
+    if mods_creation_lvl >= 3:
         get_logger().info("=> PRE CONDITION STAGE fixture_create_lists")
         payload = JsonReader.get_json(
             "./main/trello/api/resources/payload_lists_creation.json")
@@ -68,7 +69,7 @@ def pytest_bdd_before_scenario(request, feature, scenario):  # noqa:E501 pylint:
         get_logger().debug('Response:\n%s', response)
         request.context["lists"] = response
 
-    if mods_creation_lvl >= 3:
+    if mods_creation_lvl >= 4:
         get_logger().info("=> PRE CONDITION STAGE fixture_create_cards")
         payload = JsonReader.get_json(
             "./main/trello/api/resources/payload_cards_creation.json")
@@ -104,6 +105,12 @@ def pytest_bdd_after_scenario(request, feature, scenario):  # noqa:E501 pylint: 
             RequestManager.get_instance().make_request(
                 HttpMethods.DELETE.value,
                 f"/{mod}/{element_id}")
+            get_logger().info("-----------------")
+
+    if "fixture_delete_only_organization" in scenario_tags:
+            get_logger().info("=> CLEAN UP STAGE")
+            element_id = request.response["id"]
+            TrelloOrganization.delete_organization(element_id)
             get_logger().info("-----------------")
 
     get_logger().info(  # pylint: disable=W1203

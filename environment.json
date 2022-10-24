@@ -1,0 +1,83 @@
+{
+    "headers": "application/json",
+
+    "test": {
+        "api-url": "https://api.trello.com/1",
+        "ui-url": "https://trello.com",
+        "users": {
+            "admin": {
+                "key": "",
+                "token": "",
+                "username": "uname",
+                "password": "pass"
+            },
+
+            "guest": {
+                "key": "yourkey",
+                "token": "yourtoken",
+                "username": "uname",
+                "password": "passs"
+            }
+        }
+    },
+
+    "develop": {
+        "api-url": "https://api.trello.com/1",
+        "ui-url": "https://trello.com",
+        "users": {
+            "admin": {
+                "key": "yourkey",
+                "token": "yourtoken",
+                "username": "uname",
+                "password": "pass"
+            },
+
+            "guest": {
+                "key": "yourkey",
+                "token": "yourtoken",
+                "username": "uname",
+                "password": "pass"
+            }
+        }
+    },
+
+    "staging": {
+        "api-url": "https://api.trello.com/1",
+        "ui-url": "https://trello.com",
+        "users": {
+            "admin": {
+                "key": "yourkey",
+                "token": "yourtoken",
+                "username": "uname",
+                "password": "pass"
+            },
+
+            "guest": {
+                "key": "yourkey",
+                "token": "yourtoken",
+                "username": "uname",
+                "password": "pass"
+            }
+        }
+    },
+
+    "production": {
+        "api-url": "https://api.trello.com/1",
+        "ui-url": "https://trello.com",
+        "users": {
+            "admin": {
+                "key": "yourkey",
+                "token": "yourtoken",
+                "username": "uname",
+                "password": "pass"
+            },
+
+            "guest": {
+                "key": "yourkey",
+                "token": "yourtoken",
+                "username": "uname",
+                "password": "pass"
+            }
+        }
+    }
+}

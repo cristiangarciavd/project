@@ -11,6 +11,8 @@ DEFAULT_ENVIRONMENT_JSON=.environment.json
 ENVIRONMENT_JSON="${DEFAULT_ENVIRONMENT_JSON}"
 
 setup:
+	@echo "Installing PIPENV package..."
+	python -m pip install pipenv
 	@echo "Installing dependencies..."
 	python -m pipenv install -d
 	@echo "Setup cucumber-html-reporter"

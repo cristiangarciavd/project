@@ -12,3 +12,4 @@ class TrelloApiRoutes(Enum):
     CARDS = "/cards/"
     CARD_IN_BOARD = "/cards/{}/board"
     CARD_IN_LIST = "/cards/{}/list"
+    ORGANIZATIONS = "/organizations/"

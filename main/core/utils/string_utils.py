@@ -8,7 +8,8 @@ class StringUtils:
     """
     @staticmethod
     def replace_tag(string, request):
-        """Method to replace the "string" with the content inside "request" if it has a tag < >
+        """Method to replace the "string" with the content inside
+        "request" if it has a tag < >
 
         Parameters
         ----------
@@ -25,7 +26,7 @@ class StringUtils:
         matches = re.findall(r"<[\w\.]*>", string)
         for match in matches:
             if match:
-                feature_name, feature_property = re.search(r"[\w\.]+", match)[0].split(".")
+                feature_name, feature_property = re.search(r"[\w\.]+", match)[0].split(".")  # noqa:E501 E261 pylint: disable=C0301
                 feature = request.context[feature_name.lower()]
                 if feature_property in feature:
                     value = feature[feature_property]
@@ -86,7 +87,8 @@ class StringUtils:
 
     @staticmethod
     def change_name(payload, module_name):
-        """Method to change the name of the module according to the number of fixture
+        """Method to change the name of the module according to the number
+        of fixture
 
         Parameters
         ----------

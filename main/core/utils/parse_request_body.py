@@ -17,9 +17,10 @@ class ParseRequestBody:
         request : object
             request fixture object
         action : string, optional
-            if "action" is "send" every Boolean value like: True, False will be parse as a string Boolean
-            if "action" is "receive" every string Boolean will be parse as a Boolean, by default "send"
-
+            if "action" is "send" every Boolean
+            value like: True, False will be parse as a string Boolean
+            if "action" is "receive" every string Boolean will
+            be parse as a Boolean, by default "send"
         Returns
         -------
         Dict
@@ -30,9 +31,9 @@ class ParseRequestBody:
             for row in body:
                 value = StringUtils.replace_tag(row["value"], request)
                 if action == "send":
-                    data[str(row["key"])] = ParseRequestBody.parse_to_send(value)
+                    data[str(row["key"])] = ParseRequestBody.parse_to_send(value)  # noqa:E501 E261
                 elif action == "receive":
-                    data[str(row["key"])] = ParseRequestBody.parse_to_receive(value)
+                    data[str(row["key"])] = ParseRequestBody.parse_to_receive(value)  # noqa:E501 E261 pylint: disable=C0301
         return data
 
     @staticmethod
@@ -50,7 +51,7 @@ class ParseRequestBody:
             parse string
         """
         parsed_params = {"True": "true", "False": "false", "None": "none"}
-        return parsed_params.get(value) if value.capitalize() in parsed_params else value
+        return parsed_params.get(value) if value.capitalize() in parsed_params else value  # noqa:E501 E261 pylint: disable=C0301
 
     @staticmethod
     def parse_to_receive(value):
@@ -67,4 +68,4 @@ class ParseRequestBody:
             parse boolean
         """
         parsed_params = {"True": True, "False": False, "None": None}
-        return parsed_params.get(value) if value.capitalize() in parsed_params else value
+        return parsed_params.get(value) if value.capitalize() in parsed_params else value  # noqa:E501 E261 pylint: disable=C0301

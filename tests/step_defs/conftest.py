@@ -8,7 +8,7 @@ from main.trello.api.trello_cards import TrelloCard
 from main.logger.logger import get_logger
 
 
-def pytest_bdd_before_scenario(request, feature, scenario):  # pylint: disable=W0613
+def pytest_bdd_before_scenario(request, feature, scenario):  # noqa:E501 pylint: disable=W0613
     """ pytest bdd before scenario
 
     Parameters
@@ -24,17 +24,16 @@ def pytest_bdd_before_scenario(request, feature, scenario):  # pylint: disable=W
     request.response = {}
     scenario_tags = list(scenario.tags)
     get_logger().info("TAGS %s", scenario.tags)
-    
+
     trello_mods = ["organizations", "boards", "lists", "cards"]
     for mod in trello_mods:
         if f"fixture_create_{mod}" in scenario_tags:
             mods_creation_lvl = trello_mods.index(mod)
-            
-    
+
     if mods_creation_lvl >= 0:
-        get_logger().info("=> PRE CONDITION STAGE fixture_create_organizations")
+        get_logger().info("=> PRE CONDITION STAGE fixture_create_organizations")  # noqa:E501
         payload = JsonReader.get_json(
-            "./main/trello/api/resources/payload_organizations_creation.json")
+            "./main/trello/api/resources/payload_organizations_creation.json")  # noqa:E501
         response, _ = RequestManager.get_instance().make_request(
             HttpMethods.POST.value,
             "/organizations",
@@ -42,12 +41,12 @@ def pytest_bdd_before_scenario(request, feature, scenario):  # pylint: disable=W
         )
         get_logger().debug('Response:\n%s', response)
         request.context["organizations"] = response
-        
+
     if mods_creation_lvl >= 1:
         get_logger().info("=> PRE CONDITION STAGE fixture_create_boards")
         payload = JsonReader.get_json(
             "./main/trello/api/resources/payload_boards_creation.json")
-        payload['idOrganization']= request.context["organizations"]["id"]
+        payload['idOrganization'] = request.context["organizations"]["id"]
         response, _ = RequestManager.get_instance().make_request(
             HttpMethods.POST.value,
             "/boards",
@@ -55,12 +54,12 @@ def pytest_bdd_before_scenario(request, feature, scenario):  # pylint: disable=W
         )
         get_logger().debug('Response:\n%s', response)
         request.context["boards"] = response
-    
+
     if mods_creation_lvl >= 2:
         get_logger().info("=> PRE CONDITION STAGE fixture_create_lists")
         payload = JsonReader.get_json(
             "./main/trello/api/resources/payload_lists_creation.json")
-        payload['idBoard']= request.context["boards"]["id"]
+        payload['idBoard'] = request.context["boards"]["id"]
         response, _ = RequestManager.get_instance().make_request(
             HttpMethods.POST.value,
             "/lists",
@@ -68,27 +67,27 @@ def pytest_bdd_before_scenario(request, feature, scenario):  # pylint: disable=W
         )
         get_logger().debug('Response:\n%s', response)
         request.context["lists"] = response
-    
+
     if mods_creation_lvl >= 3:
         get_logger().info("=> PRE CONDITION STAGE fixture_create_cards")
         payload = JsonReader.get_json(
             "./main/trello/api/resources/payload_cards_creation.json")
-        idList = request.context["lists"]["id"]
-        response, _ = TrelloCard.create_card(idList, payload=payload)
+        id_list = request.context["lists"]["id"]
+        response, _ = TrelloCard.create_card(id_list, payload=payload)
         get_logger().debug('Response:\n%s', response)
         request.context["cards"] = response
 
 
-def pytest_bdd_step_error(request, feature, scenario, step, step_func, step_func_args, exception):  # noqa:E501  pylint: disable=W0613
+def pytest_bdd_step_error(request, feature, scenario, step, step_func, step_func_args, exception):  # noqa:E501 # pylint: disable=W0613 R0913
     """ pytest bdd step error
 
     Args:
         multiple args related with pytest bdd
     """
-    get_logger().error(f"===>>> FAILED STEP: {step}")
+    get_logger().error(f"===>>> FAILED STEP: {step}")  # pylint: disable=W1203
 
 
-def pytest_bdd_after_scenario(request, feature, scenario):  # pylint: disable=W0613
+def pytest_bdd_after_scenario(request, feature, scenario):  # noqa:E501 pylint: disable=W0613
     """ pytest bdd after scenario
 
     Args:
@@ -107,8 +106,10 @@ def pytest_bdd_after_scenario(request, feature, scenario):  # pylint: disable=W0
                 f"/{mod}/{element_id}")
             get_logger().info("-----------------")
 
-    get_logger().info(
-        f"===>>> FINISHED SCENARIO {scenario.name} WITH STATUS: {'FAILED' if scenario.failed else 'SUCCESS'}\n")
+    get_logger().info(  # pylint: disable=W1203
+        f"===>>> FINISHED SCENARIO {scenario.name} WITH STATUS:\
+        {'FAILED' if scenario.failed else 'SUCCESS'}\n")
+
 
 @pytest.fixture()
 def datatable():

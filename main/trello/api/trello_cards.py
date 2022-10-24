@@ -19,7 +19,7 @@ class TrelloCard:
         return RequestManager.get_instance().make_request(
             HttpMethods.POST.value,
             endpoint_card,
-            idList=list_id, 
+            idList=list_id,
             **Kwargs
         )
 

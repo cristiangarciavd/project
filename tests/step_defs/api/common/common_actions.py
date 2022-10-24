@@ -4,8 +4,9 @@ This module contains step definitions for trello api actions.
 from pytest_bdd import given, parsers, when
 from sttable import parse_str_table
 from main.core.api.request_manager import RequestManager
-from main.core.utils.parse_request_body import ParseRequestBody 
+from main.core.utils.parse_request_body import ParseRequestBody
 from main.core.utils.string_utils import StringUtils
+
 
 @given(parsers.parse("the following body parameters:\n{body}"))
 def step_set_body_parameters(datatable, body, request):
@@ -20,8 +21,9 @@ def step_set_body_parameters(datatable, body, request):
     body = ParseRequestBody.generate_data(datatable.body.rows, request)
     request.body = body
 
+
 @when(parsers.parse('a "{http_method}" request to "{endpoint}" is send'))
-def trelo_card_response(http_method, request, endpoint):
+def step_make_request(http_method, request, endpoint):
     """Do request to the cards endpoint
     Args:
         http_method (string): http method or verb
@@ -36,4 +38,3 @@ def trelo_card_response(http_method, request, endpoint):
     )
     request.response = response
     request.context["s_code"] = s_code
-    

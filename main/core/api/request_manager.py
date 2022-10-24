@@ -42,7 +42,7 @@ class RequestManager():
         return RequestManager.__instance
 
     @wrap(entering, exiting)
-    def make_request(self, http_method, endpoint, payload={}, **kwargs):
+    def make_request(self, http_method, endpoint, payload={}, **kwargs):  # noqa:E501 pylint: disable=W0102
         """Send request
 
         Args:
